@@ -1,0 +1,8 @@
+{
+  "name": "Army TMS Ver 3.0",
+  "description": "Ứng dụng chấm công bằng định vị và nhận diện khuôn mặt",
+  "requestFramePermissions": [
+    "camera",
+    "geolocation"
+  ]
+}

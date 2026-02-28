@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+@theme {
+  /* Fonts */
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* Standardized Typography Scale */
+  --text-xxs: 0.65rem;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+
+  /* Standardized Border Radius - The "Army" Look */
+  --radius-xs: 0.5rem;      /* 8px */
+  --radius-sm: 0.75rem;     /* 12px */
+  --radius-md: 1rem;        /* 16px */
+  --radius-lg: 1.25rem;     /* 20px */
+  --radius-xl: 1.5rem;      /* 24px - Standard Card */
+  --radius-2xl: 2rem;       /* 32px - Large Container */
+  --radius-button: 1rem;    /* 16px */
+
+  /* Brand Colors */
+  --color-primary: #1a73e8;
+  --color-secondary-green: #34a853;
+  --color-secondary-red: #ea4335;
+  --color-secondary-yellow: #fbbc04;
+  --color-secondary-purple: #a142f4;
+  --color-secondary-orange: #fa7b17;
+  --color-neutral-black: #1e293b;
+  --color-neutral-white: #ffffff;
+
+  /* Dark Mode Palette */
+  --color-dark-bg: #020617;
+  --color-dark-surface: #0f172a;
+  --color-dark-border: #1e293b;
+  --color-dark-text-primary: #f1f5f9;
+  --color-dark-text-secondary: #94a3b8;
+
+  /* Shadows */
+  --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  --shadow-premium-dark: 0 20px 40px -10px rgba(0, 0, 0, 0.6);
+}
+
+/* Configure dark mode to use .dark class */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+    scroll-behavior: smooth;
+    font-size: 16px;
+  }
+
+  body {
+    @apply bg-slate-50 text-slate-600 transition-colors duration-300 antialiased font-sans;
+  }
+
+  /* Force dark mode styles when .dark class is present */
+  html.dark body {
+    background-color: var(--color-dark-bg);
+    color: var(--color-dark-text-secondary);
+    --color-neutral-black: var(--color-dark-text-primary);
+  }
+
+  /* Sync heading and bold text colors project-wide */
+  h1, h2, h3, h4, h5, h6, 
+  .font-black, .font-extrabold, .font-bold,
+  .text-slate-900, .text-slate-800, .text-slate-700, .text-neutral-black {
+    @apply text-slate-900 dark:text-dark-text-primary transition-colors duration-300;
+  }
+
+  /* Secondary and muted text synchronization */
+  p, span:not([class*="text-"]), div:not([class*="text-"]),
+  .text-slate-600, .text-slate-500, .text-slate-400, .text-slate-300 {
+    @apply dark:text-dark-text-secondary transition-colors duration-300;
+  }
+}
+
+@layer components {
+  /* Hiệu ứng Glassmorphism cho BottomNav - Tăng độ đục để che list bên dưới */
+  .glass {
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+  }
+
+  .dark .glass {
+    background-color: rgba(15, 23, 42, 0.9); /* Slate 900 đục 90% để che nội dung */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Các tiện ích hỗ trợ hiển thị dữ liệu */
+.tabular-nums { font-variant-numeric: tabular-nums; }
+.custom-scrollbar::-webkit-scrollbar { display: none; }
+.custom-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Hide scrollbar globally but allow scrolling */
+::-webkit-scrollbar {
+  display: none;
+}
+* {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
