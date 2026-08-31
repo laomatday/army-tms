@@ -106,11 +106,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   useEffect(() => {
     if (!user) return;
 
-    if (TEST_MODE) {
-      if (appMode !== 'app') setAppMode('app');
-      return;
-    }
-
     if (user.role === 'Admin') {
       const validAdminModes: AppMode[] = ['app', 'admin', 'kiosk', 'selection'];
       if (!validAdminModes.includes(appMode)) {
